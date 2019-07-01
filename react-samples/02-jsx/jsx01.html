@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app1"></div>
+    <div id="app2"></div>
+<!--
+  往容器中插入一个span标签, class为: "it-like", 内容为: "撩课学院"。
+  两种实现方式: a) 通过典型js方式;  b) JSX方式?
+-->
+
+</body>
+<script src="../js/react.development.js" type="text/javascript"></script>
+<script src="../js/react-dom.development.js" type="text/javascript"></script>
+<script src="../js/babel.min.js" type="text/javascript"></script>
+<script type="text/babel">
+    let myClass="itlike";
+    let myContent="Hello React";
+    const vDom = <span className={myClass}>{myContent}</span>
+    ReactDOM.render(vDom,document.getElementById('app1'));
+</script>
+</html>
