@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="../../bower_components/react/react.js"></script><!--核心react-->
+	<script type="text/javascript" src="../../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+	<script type="text/javascript" src="../../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id='app'></div>
+<script type="text/babel">
+	
+	/**
+	 * 在方法里面调this.show是完全没有问题的，可以让show里面的this指向这个Leo
+	 * 但是，在render的return 里面的jsx就不能这么调用了。此时必须用binde
+	 * 
+	 */
+	class Leo extends React.Component{
+		render(){
+			this.show();
+			return (<div>
+						{/*<input type='button' value='click me' onClick={this.show.bind(this)}/>
+						<br/>
+						<span>{this.props.a}</span>
+						<br/>
+						<span>{this.props.b}</span>*/}
+						<table>
+							<tr>
+								<td>
+									<select/>
+								</td>
+							</tr>
+						</table>
+					</div>);
+		}
+		show(){
+			console.log(this);
+			this.show2();
+		}
+
+		show2(){
+			console.log(this);
+		}
+	}
+
+	ReactDOM.render(<Leo a='12' b='9'></Leo>,app);
+
+	
+</script>
+</body>
+</html>
+
