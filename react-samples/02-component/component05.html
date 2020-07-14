@@ -11,12 +11,25 @@
 <script src="../js/react-dom.development.js" type="text/javascript"></script>
 <script src="../js/babel.min.js" type="text/javascript"></script>
 <script type="text/babel">
-    class Liao extends React.Component{
-        constructor(props){
-            super(props);
+    // class Liao extends React.Component{
+    //     constructor(props){
+    //         super(props);
+    //
+    //     }
+    // }
 
+    class Test extends React.Component {
+        handleClick () {
+            console.log(this);
+        }
+        render () {
+            return <button onClick={this.handleClick}>click me</button>
         }
     }
+
+    ReactDOM.render(
+        <Test/>
+        ,document.getElementById('app1'));
 
 </script>
 </html>
