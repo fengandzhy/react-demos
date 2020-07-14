@@ -16,27 +16,28 @@
 	 * 
 	 */
 	class Leo extends React.Component{
-		render(){
+
+
+	    render(){
 			this.show();
-			return (<div>
-						{/*<input type='button' value='click me' onClick={this.show.bind(this)}/>
+			return (
+			    	<div>
+						<input type='button' value='click me' onClick={this.show.bind(this)}/>
+						<br/>
+                        <input type='button' value='click me' onClick={this.show1}/>
 						<br/>
 						<span>{this.props.a}</span>
 						<br/>
-						<span>{this.props.b}</span>*/}
-						<table>
-							<tr>
-								<td>
-									<select/>
-								</td>
-							</tr>
-						</table>
-					</div>);
+						<span>{this.props.b}</span>
+					</div>
+				);
 		}
 		show(){
 			console.log(this);
 			this.show2();
 		}
+
+
 
 		show2(){
 			console.log(this);

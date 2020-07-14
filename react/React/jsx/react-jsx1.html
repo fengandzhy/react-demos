@@ -9,10 +9,24 @@
 <body>
 <div id='app'></div>
 <script type="text/babel">
-	ReactDOM.render(
-		<h1>hello react</h1>,
-		document.getElementById('app')
-		);
+	// ReactDOM.render(
+	// 	<h1>hello react</h1>,
+	// 	document.getElementById('app')
+	// );
+
+    class Test extends React.Component {
+
+        handleClick () {
+            this.setState({});
+        }
+
+        render () {
+            return <button onClick={this.handleClick}>Click me</button>
+        }
+
+    }
+
+    ReactDOM.render(<Test></Test>,app);
 </script>
 </body>
 </html>

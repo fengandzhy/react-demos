@@ -14,10 +14,28 @@
 <script src="../js/react-dom.development.js" type="text/javascript"></script>
 <script src="../js/babel.min.js" type="text/javascript"></script>
 <script type="text/babel">
-    const containerDiv = document.getElementById('app');
+    // const containerDiv = document.getElementById('app');
+    //
+    // const vDom = <div>Hello React</div>;
+    //
+    // ReactDOM.render(vDom,containerDiv);
 
-    const vDom = <div>Hello React</div>;
+    class LoggingButton extends React.Component {
+        // 这个语法确保了 `this` 绑定在  handleClick 中
+        // 这里只是一个测试
+        handleClick = () => {
+            console.log('this is:', this);
+        }
 
-    ReactDOM.render(vDom,containerDiv);
+        render() {
+            return (
+                <button onClick={this.handleClick}>
+                    Click me
+                </button>
+            );
+        }
+    }
+
+    ReactDOM.render(<LoggingButton></LoggingButton>,app);
 </script>
 </html>
