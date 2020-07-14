@@ -12,21 +12,22 @@
 	// ReactDOM.render(
 	// 	<h1>hello react</h1>,
 	// 	document.getElementById('app')
-	// );
 
-    class Test extends React.Component {
+	// 	);
 
-        handleClick () {
-            this.setState({});
-        }
+	class Test extends React.Component {
+		handleClick () {
+			console.log(this);
+		}
+		render () {
+			return <button onClick={this.handleClick}>click me</button>
+		}
+	}
 
-        render () {
-            return <button onClick={this.handleClick}>Click me</button>
-        }
+	ReactDOM.render(
+			<Test/>
+			,document.getElementById('app'));
 
-    }
-
-    ReactDOM.render(<Test></Test>,app);
 </script>
 </body>
 </html>
