@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script type="text/javascript" src="../../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+    <div id='app'></div>
+</body>
+<script type="text/babel">
+    class Life extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                msg:''
+            }
+        }
+        componentWillMount(){
+            console.log('组件挂载前');
+        }
+        componentDidMount(){
+            console.log('组件挂载后');
+        }
+        componentWillUpdate(){
+            console.log('组件更新前');
+        }
+        componentDidUpdate(){
+            console.log('组件更新后');
+        }
+        componentWillUnmount(){
+            console.log('组件卸载之前')
+        }
+
+        render(){
+            console.log('挂载组件');
+            return(
+                <div>
+                    <div>{this.state.msg}</div>
+                    <button onClick={this.click.bind(this)}>点击</button>
+                </div>
+            )
+        }
+
+        click(){
+            this.setState({
+                msg:Math.random()
+            });
+        }
+
+    }
+    ReactDOM.render(<Life/>,app);
+
+</script>
+</html>

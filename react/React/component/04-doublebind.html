@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定</title>
+    <script type="text/javascript" src="../../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+    <div id='app'></div>
+</body>
+<script type="text/babel">
+    class DoubleBind extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                msg:''
+            }
+        }
+        render(){
+            return (
+                <div>
+                    <input type="text" onChange={this.show.bind(this)} ref="frank"/>
+                    <div>{this.state.msg}</div>
+                </div>
+            );
+        }
+        show(){
+            this.setState({
+                msg:this.refs['frank'].value
+            })
+        }
+    }
+    ReactDOM.render(<DoubleBind/>,app);
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>远程调用Jquery</title>
+    <script type="text/javascript" src="../../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../../bower_components/babel/browser.js"></script><!--使用jsx-->
+    <script type="text/javascript" src="../../bower_components/jquery/jquery.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id='app'></div>
+</body>
+<script type="text/babel">
+    class Remote extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                array:[]
+            }
+        }
+
+        componentWillMount(){
+            this.getDataFromRemote();
+        }
+
+        getDataFromRemote(){
+            let _this = this;
+            $.ajax({
+                url:'http://localhost:2831/get',
+                success(data){
+                    _this.setState({
+                        array:data
+                    });
+                }
+            });
+
+        }
+        render(){
+            let arr = [];
+            this.state.array.forEach((val,index)=>{
+                arr.push(<li key={index}>{val}</li>);
+            });
+            return (
+                <div>
+                    <p style={{display:this.state.array.length==0?'block':'none'}}>暂无数据....</p>
+                    <ul>
+                        {arr}
+                    </ul>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Remote/>,app);
+</script>
+</html>

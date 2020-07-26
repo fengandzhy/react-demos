@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件向父组件通信</title>
+    <script type="text/javascript" src="../../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id='app'></div>
+</body>
+<script type="text/babel">
+
+    /**
+     * 子组件向父组件发送消息的时候是通过回调函数来实现的
+     * */
+    class Son extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                msg:'这是子组件的数据'
+            }
+        }
+
+        /**
+         * 这里在子元素的上的属性必须是一个函数，这样的话才能把值传入进去
+         * */
+        componentWillMount(){
+
+            this.props.data(this.state.msg);
+        }
+
+        render(){
+            return (
+                <div>这里是子组件</div>
+            )
+        }
+    }
+
+    class Father extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                msg:''
+            }
+        }
+
+        callback(v){
+            console.log(v);
+            this.setState({
+                msg:v
+            });
+        }
+
+        render(){
+            return (
+                <div>
+                    <p>父组件在这里 {this.state.msg}</p>
+                    <Son data={this.callback.bind(this)}/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Father/>,app);
+
+</script>
+</html>

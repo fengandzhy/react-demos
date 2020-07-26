@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阻止冒泡-合成事件与非最外层document上的事件</title>
+    <script type="text/javascript" src="../../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id='app'></div>
+</body>
+<script type="text/babel">
+    class StopPropagation extends React.Component{
+        constructor(props) {
+            super(props);
+            this.state = {
+                count:0,
+            }
+        }
+        render(){
+            return(
+                <div ref="test">
+                    <p>{this.state.count}</p>
+                    <a ref="update" onClick={(e)=>this.handleClick(e)}>更新</a>
+                </div>
+            );
+        }
+        /**
+         * 阻止合成事件与除最外层document上的原生事件上的冒泡，通过判断e.target来避免
+         * */
+        handleClick(e){
+            this.setState({
+                count:++this.state.count
+            });
+            e.nativeEvent.stopImmediatePropagation();
+        }
+        componentDidMount() {
+            document.body.addEventListener('click',e=>{
+                if(e.target && e.target.matches('a')){
+                    return;
+                }
+                console.log('body');
+            });
+        }
+    }
+    ReactDOM.render(<StopPropagation/>,app);
+</script>
+</html>

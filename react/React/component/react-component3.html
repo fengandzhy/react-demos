@@ -12,8 +12,9 @@
 	
 	/**
 	 * 在方法里面调this.show是完全没有问题的，可以让show里面的this指向这个Leo
-	 * 但是，在render的return 里面的jsx就不能这么调用了。此时必须用binde
-	 * 
+	 * 但是，在render的return 里面的jsx就不能这么调用了。此时必须用bind
+	 *
+	 *
 	 */
 	class Leo extends React.Component{
 
@@ -22,9 +23,9 @@
 			this.show();
 			return (
 			    	<div>
-						<input type='button' value='click me' onClick={this.show.bind(this)}/>
+						<input type='button' value='click me1' onClick={this.show.bind(this)}/>
 						<br/>
-                        <input type='button' value='click me' onClick={this.show1}/>
+                        <input type='button' value='click me2' onClick={()=>this.show2()}/>
 						<br/>
 						<span>{this.props.a}</span>
 						<br/>
@@ -34,7 +35,6 @@
 		}
 		show(){
 			console.log(this);
-			this.show2();
 		}
 
 
