@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsx实现虚拟dom2</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+<script type="text/babel">
+    let users=[
+        {name:"张三"},
+        {name:"李四"},
+        {name:"王五"}
+    ];
+    /*@jsx createElement*/
+    let vDom = (<div id='app'>
+        Hello World!
+        <ul>
+            {
+                users.map((item,index)=>{
+                    return (<li key={index}>{item.name}</li>)
+                })
+            }
+        </ul>
+    </div>);
+    function createElement(nodeName,attribute,...args){
+        let element = {nodeName:nodeName,attribute:attribute,children:[].concat(...args)};
+        //console.log({nodeName:nodeName,attribute:attribute,children:[].concat(...args)});
+        return element;
+    }
+
+    function render(vnode){
+
+        if(vnode.split){
+            return document.createTextNode(vnode);
+        }
+
+        let node = document.createElement(vnode.nodeName);
+
+        let attr = vnode.attr || {};
+        Object.keys(attr).forEach((key)=>{
+            node.setAttribute(key,attr[key]);
+        });
+
+        (vnode.children || []).forEach((n)=>{
+            node.appendChild(render(n))
+        });
+
+        return node;
+
+    }
+    let dom=render(vDom);
+    document.body.appendChild(dom);
+
+</script>
+
+</body>
+</html>

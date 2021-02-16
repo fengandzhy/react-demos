@@ -6,63 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no"/>
     <title>jsx实现虚拟dom</title>
-    <!--<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!--<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
-    <script src="js/babel.min.js"></script>
+    <!--<script src="js/babel.min.js"></script>-->
 </head>
 <body>
 <div id="output"></div>
 <script>
     function demo(){
-        //es5转真实数组
-        // console.log(Array.prototype.slice.call(arguments));
-        //es6转真实数组
-        // console.log(Array.from(arguments));
+        //console.log(arguments);
+        //console.log(Array.prototype.slice.call(arguments));
+        console.log(Array.from(arguments));
     }
-    // demo(1,2,3,4)
-
-    // let getArr=(...args)=>{
-    //     console.log(args);
-    // };
-    // getArr(1,2,3,4);
-    // var str1="1";
-    // var str2="2";
-    // var str3="3";
-    // console.log([].concat(str1,str2,str3));
+    demo(1,2,3,4);
 </script>
 <script type="text/babel">
-    /*@jsx createElement*/ //@jsx babel的自执行指令
-    let users=[
-        {name:"张三"},
-        {name:"李四"},
-        {name:"王五"}
-    ];
-    let vDom=(<div id="app" name="app">
-        hello world!
+
+    /*@jsx createElement*/
+    let vDom=(<div id='app'>
+        Hello World!
         <ul>
-            {
-                users.map((item,index)=>{
-                    return (
-                        <li key={index}>{item.name}</li>
-                    )
-                })
-            }
+            <li>张三</li>
+            <li>李四</li>
         </ul>
-    </div>);
-    // let vDom=("hello world! ");
-    /*
-    将真实的dom转成虚拟dom，json格式开销小，性能高
-    {
-        nodeName:div,
-        attr:{
-            id:"app"
-        },
-        children:["hello world!"]
-    }
-     */
+    </div>)
+    /**
+   将真实的dom转成虚拟dom，json格式开销小，性能高
+   {
+       nodeName:div,
+       attr:{
+           id:"app"
+       },
+       children:["hello world!"]
+   }
+    */
     function createElement(nodeName,attr,...args){
+        console.log({nodeName:nodeName,attr:attr,children:[].concat(...args)});
         return {nodeName:nodeName,attr:attr,children:[].concat(...args)}
     }
+
     function render(vnode){
         //如果是文本
         if(vnode.split){
@@ -85,6 +67,7 @@
     }
     let dom=render(vDom);
     document.body.appendChild(dom);
+
 </script>
 </body>
 </html>
