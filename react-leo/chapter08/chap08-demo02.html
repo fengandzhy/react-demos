@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡2</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<style type="text/css">
+    .myDiv{width:200px;height:200px;border:1px solid black;}
+    input.active{background:red}
+</style>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class TopNode extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                val:0
+            }
+        }
+        componentWillMount(){
+            let timer = this.props.timer;
+            setInterval(()=>{
+                this.change();
+            },timer)
+        }
+        render(){
+            let topValue = this.props.topValueArr;
+            let arr = [];
+            for(let i=0;i<topValue.length;i++){
+                arr.push(<button key={i} style={this.state.val==i?{background:'red'}:{}}>{topValue[i]}</button>)
+            }
+            return(<div>
+                {arr}
+            </div>);
+        }
+
+        change(){
+            let v = this.state.val;
+            if(v<2){
+                v++;
+            }else{
+                v = 0;
+            }
+            this.setState({
+                val:v
+            });
+            this.props.childFn(v);
+        }
+    }
+
+    class BottomNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            let bottomValue = this.props.bottomValueArr;
+            let currentIndex = this.props.myIndex;
+            let arr = [];
+            for(let i=0;i<bottomValue.length;i++){
+                arr.push(<div key={i} className="myDiv" style={currentIndex == i ? {display:'block'}:{display:'none'}}>{bottomValue[i]}</div>)
+            }
+            return(
+                <div>
+                    {arr}
+                </div>
+            );
+        }
+    }
+
+    class Tab extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                index:0
+            }
+        }
+        render(){
+            return(
+                <div>
+                    <TopNode topValueArr={this.props.tabJson.topValue} childFn={this.change.bind(this)} timer={this.props.tabJson.timer}></TopNode>
+                    <BottomNode bottomValueArr={this.props.tabJson.bottomValue} myIndex={this.state.index}/>
+                </div>
+            );
+        }
+        change(v){
+            console.log(v);
+            this.setState({
+                index:v
+            });
+        }
+    }
+
+    ReactDOM.render(<Tab tabJson={{'topValue':['中国','瑞士','新西兰'],bottomValue:['很强大，最棒','银行挺不错','环境还不错'],timer:2000}}/>,app);
+</script>
+</html>

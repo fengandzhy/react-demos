@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class TopNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            return(
+                <div>上边节点</div>
+            );
+        }
+    }
+
+    class MiddleNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            return(
+                <div>中间节点</div>
+            );
+        }
+    }
+
+    class BottomNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            return(
+                <div>下边节点</div>
+            );
+        }
+    }
+
+    class MyTab extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            return(
+                <div>
+                    <TopNode></TopNode>
+                    <MiddleNode/>
+                    <BottomNode></BottomNode>
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(<MyTab/>,app);
+</script>
+</html>

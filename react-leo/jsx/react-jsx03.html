@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react-jsx03</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    /**
+     * jsx - 支持style - 里面使用json
+     {{'color':'green'}}
+     第一层是使用告诉jsx我要用js了 第二层的是json的
+     * */
+    let str = "Welcome React!";
+    let leo = (
+        <div>
+            <img></img>
+            <input></input>
+            <h1 style={{'color':'green'}}>{str}</h1>
+            <span>kkk</span>
+        </div>
+    );
+    ReactDOM.render(leo,document.getElementById('app'));
+
+</script>
+</html>

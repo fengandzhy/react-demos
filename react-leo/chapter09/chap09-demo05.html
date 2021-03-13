@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第五步</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<style type="text/css">
+    *{margin:0;padding:0}
+    *{margin:0;padding:0}
+    .outBox{
+        width:400px;overflow:hidden;position:absolute;border:1px solid black;
+        transform:translate(-50%,-50%);left:50%;top:50%;
+    }
+
+    .topDiv{width:100%;height:300px;float:left;position:relative;}
+    .topDiv ul{height:100%;position:absolute;left:0;top:0;}
+    .topDiv ul li{width:400px;height:300px;float:left;background-size:cover;}
+
+    .centerBox{width:100%;height:20px;background:pink;float:left;line-height:20px;}
+    .centerBox .rightBox span{cursor:pointer;margin-right:10px;}
+    .centerBox .rightBox{float:right;}
+    .centerBox .leftText{margin-left:10px;}
+
+    .bottomBox{width:100%;height:100px;float:left;position:relative;}
+    .bottomBox ul{height:100%;position:absolute;}
+    .bottomBox ul li{width:90px;height:90px;border:5px black solid;float:left;background-size:cover;background-position:center center;}
+    .bottomBox ul li.active{border-color:green;}
+</style>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    let Json = {
+        Pic:['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'],
+        text:['这是第一张图','这是第二张图','这是第三张图','这是第四张图','这是第五张图','这是最后一张图']
+    }
+    class TopNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            let pics = this.props.pics;
+            const url = 'images/';
+            let aLi = [];
+            pics.forEach((val,index)=>{
+                aLi.push(<li key={index} style={{backgroundImage:'url('+url+val+')'}}></li>)
+            })
+            return(
+                <div className='topDiv'>
+                    <ul style={{width:pics.length*400+'px',left:this.props.index*-400+'px'}}>
+                        {aLi}
+                    </ul>
+                </div>
+            );
+        }
+    }
+
+    class MiddleNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            let text = this.props.text;
+
+            return(
+                <div className='centerBox'>
+                    <span className='leftText'>{this.props.text[this.props.index]}</span>
+                    <div className='rightBox'>
+                        <span>大</span>
+                        <span>小</span>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    class BottomNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            let pics = this.props.pics;
+            const url = 'images/';
+            let aLi = [];
+            pics.forEach((val,index)=>{
+                // 注意这里的onClick不能直接去调用父组件的方法,而必须要先绑定一下
+                aLi.push(<li onClick={this.change.bind(this,index)} className={index==this.props.index?'active':''} key={index} style={{backgroundImage:'url('+url+val+')'}}></li>)
+            })
+            return(
+                <div className='bottomBox'>
+                    <ul style={{width:pics.length*100+'px'}}>
+                        {aLi}
+                    </ul>
+                </div>
+            );
+        }
+        change(v){
+            this.props.goFn(v);
+        }
+    }
+
+    class MyTab extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                index:0
+            }
+        }
+        render(){
+            return(
+                <div className="outBox">
+                    <TopNode pics={this.props.json.Pic} index={this.state.index}/>
+                    <MiddleNode text={this.props.json.text} index={this.state.index}/>
+                    <BottomNode pics={this.props.json.Pic} index={this.state.index} goFn={this.change.bind(this)}/>
+                </div>
+            );
+        }
+
+        change(v){
+            console.log(v);
+            this.setState({
+                index:v
+            })
+            //alert(1);
+        }
+    }
+    ReactDOM.render(<MyTab json={Json}/>,app);
+</script>
+</html>

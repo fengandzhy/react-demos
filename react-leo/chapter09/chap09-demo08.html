@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第八步</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<style type="text/css">
+    *{margin:0;padding:0}
+    .outBox{
+        width:400px;overflow:hidden;position:absolute;border:1px solid black;
+        transform:translate(-50%,-50%);left:50%;top:50%;
+    }
+
+    .topDiv{width:100%;height:300px;float:left;position:relative;}
+    .topDiv .leftClick{position:absolute;z-index:3;left:3px;top:50%;transform:translateY(-50%);background:green;color:red;cursor:pointer;}
+    .topDiv .rightClick{position:absolute;z-index:3;right:3px;top:50%;transform:translateY(-50%);background:green;color:red;cursor:pointer;}
+    .topDiv ul{height:100%;position:absolute;left:0;top:0;transition:0.7s;}
+    .topDiv ul li{width:400px;height:300px;float:left;background-size:cover;background-position:center center;overflow:hidden;}
+    .topDiv ul li img{width:100%;height:100%;transition:.3s;}
+
+    .centerBox{width:100%;height:20px;background:pink;float:left;line-height:20px;}
+    .centerBox .rightBox span{cursor:pointer;margin-right:10px;}
+    .centerBox .rightBox{float:right;}
+    .centerBox .leftText{margin-left:10px;}
+
+    .bottomBox{width:100%;height:100px;float:left;position:relative;}
+    .bottomBox ul{height:100%;position:absolute;transition:.7s;}
+    .bottomBox ul li{width:90px;height:90px;border:5px black solid;float:left;background-size:cover;background-position:center center;transition:0.7s;}
+    .bottomBox ul li.active{border-color:green;}
+</style>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    let Json = {
+        Pic:['7.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'],
+        text:['这个一个草原','这是第二张图','这是第三张图','这是第四张图','这是第五张图','这是最后一张图']
+    }
+    class TopNode extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                index:0
+            }
+        }
+
+        render(){
+            let pics = this.props.pics;
+            const url = 'images/';
+            let aLi = [];
+            pics.forEach((val,index)=>{
+                //aLi.push(<li key={index} style={{backgroundImage:'url('+url+val+')'}}></li>)
+                aLi.push(<li key={index}><img src={url+val} style={{transform:'scale('+this.props.iScale+')'}}/></li>)
+            })
+            /**
+             * 注意在这里 onClick={this.props.Lfn} 他不会去自动调用Lfn这个方法 但写成onClick={this.props.Lfn()} 它会去自动调动Lfn这个方法
+             * */
+            return(
+                <div className='topDiv'>
+                    <div className='leftClick' onClick={this.change.bind(this,'left')}>左</div>
+                    <div className='rightClick' onClick={this.change.bind(this,'right')}>右</div>
+                    <ul style={{width:pics.length*400+'px',left:this.props.index*-400+'px'}}>
+                        {aLi}
+                    </ul>
+                </div>
+            );
+        }
+
+        change(v){
+            if(v == 'left'){
+                if(this.props.index==0){
+                    alert('已经是第一张了.');
+                    return;
+                }
+                this.props.changeFn(this.props.index-1);
+            }
+            if(v =='right'){
+                if(this.props.index == this.props.pics.length-1){
+                    alert('已经是最后一张了.');
+                    return;
+                }
+                this.props.changeFn(this.props.index+1);
+            }
+        }
+    }
+
+    class MiddleNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            let text = this.props.text;
+            console.log(this.props.text);
+            return(
+                <div className='centerBox'>
+                    <span className='leftText'>{this.props.text[this.props.index]}</span>
+                    <div className='rightBox'>
+                        <span onClick={this.props.allFn.big}>大</span>
+                        <span onClick={this.props.allFn.small}>小</span>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+    class BottomNode extends React.Component{
+        constructor() {
+            super();
+        }
+        render(){
+            let pics = this.props.pics;
+            const url = 'images/';
+            let aLi = [];
+            pics.forEach((val,index)=>{
+                // 注意这里的onClick不能直接去调用父组件的方法,而必须要先绑定一下
+                aLi.push(<li onClick={this.change.bind(this,index)} className={index==this.props.index?'active':''} key={index} style={{backgroundImage:'url('+url+val+')'}}></li>)
+            })
+            return(
+                <div className='bottomBox'>
+                    <ul style={{width:pics.length*100+'px',left:this.props.index>3?(this.props.index-3)*-100+'px':'0px'}}>
+                        {aLi}
+                    </ul>
+                </div>
+            );
+        }
+        change(v){
+            this.props.goFn(v);
+        }
+    }
+
+    class MyTab extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                index:0,
+                iScale:1
+            }
+        }
+        render(){
+            return(
+                <div className="outBox">
+                    <TopNode pics={this.props.json.Pic} index={this.state.index} changeFn={this.change.bind(this)} iScale={this.state.iScale}/>
+                    <MiddleNode text={this.props.json.text} index={this.state.index} allFn={{big:this.big.bind(this),small:this.small.bind(this)}}/>
+                    <BottomNode pics={this.props.json.Pic} index={this.state.index} goFn={this.change.bind(this)}/>
+                </div>
+            );
+        }
+
+        change(v){
+
+            this.setState({
+                index:v
+            })
+        }
+
+        big(){
+            let maxB = this.state.iScale + 0.1;
+            maxB>= 2 && (maxB = 2,alert('已经最大了'));
+            //console.log(this.state.iScale)
+            this.setState({
+                iScale:maxB
+            });
+        }
+        small(){
+            let maxB = this.state.iScale - 0.1;
+            maxB<= 0.4 && (maxB = 0.4,alert('已经最小了'));
+            //console.log(this.state.iScale)
+            this.setState({
+                iScale:maxB
+            });
+        }
+
+
+    }
+    ReactDOM.render(<MyTab json={Json}/>,app);
+</script>
+</html>

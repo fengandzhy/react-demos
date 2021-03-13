@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<style type="text/css">
+    *{margin: 0;padding: 0}
+    .div{
+        height: 100px;
+        width:100px;
+        background: blue;
+        position: absolute;
+    }
+</style>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class Drag extends React.Component{
+        constructor() {
+            super();
+            this.disX = 0;
+            this.disY = 0
+        }
+
+        /**
+         * componentWillUpdate 没法在客户端方法中调用它 就是说自己的方法调用这个是不会渲染组件的
+         * */
+        componentWillUpdate(){
+            console.log('aaabbb');
+            this.disX = 20;
+            this.disY = 40;
+        }
+
+        render(){
+            return(
+                <div className="div" style={{left:this.disX,top:this.disY}} onMouseDown={this.fnDown.bind(this)}></div>
+            );
+        }
+        fnDown(e){
+            let left = e.clientX - e.target.offsetLeft;
+            let top = e.clientY - e.target.offsetTop;
+            document.onmousemove = this.fnMove.bind(this,left,top);
+            document.onmouseup = this.fnUp.bind(this);
+        }
+
+        fnMove(x,y,e){
+            //console.log(x);
+            this.componentWillUpdate();
+        }
+
+        fnUp(){
+            document.onmousemove = null;
+            document.onmouseup=null;
+        }
+
+    }
+
+    ReactDOM.render(<Drag/>,app);
+</script>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子同信</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    var x =0;
+    function c(){
+        return <span>我是函数c</span>
+    }
+
+    class Leo extends React.Component{
+        render(){
+            return <span>我是组件leo</span>
+        }
+    }
+
+    function a(v){
+        if(v>3){
+            return c();
+        }else{
+            return <Leo/>
+        }
+    }
+
+    let b = <div>{a(4)}</div>
+    ReactDOM.render(b,app);
+
+</script>
+</html>

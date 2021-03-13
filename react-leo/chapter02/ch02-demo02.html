@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this的指向1</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class Leo extends React.Component{
+        render(){
+            console.log(this);
+            return (
+                <div>
+                    <span>{this.props.a}</span>
+                    <h1>Welcome</h1>
+                    <button onClick={this.show}>Click me1</button>
+                    <button onClick={this.show.bind(this)}>Click me2</button>
+                </div>
+            );
+        }
+        show(){
+            console.log(this); //当点击Click me1时,这里react15这里的this指向的是null 在react 16这里的this指向的是undefined;
+        }
+    }
+    let app = document.getElementById('app');
+    ReactDOM.render(<Leo a='12'/>,app);
+</script>
+</html>

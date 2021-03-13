@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向绑定</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class Binding extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                msg:''
+            }
+        }
+        render(){
+            return(<div>
+                <input type="text" id="txt" onChange={this.change.bind(this,'abc')} ></input>
+                <div>{this.state.msg}</div>
+            </div>);
+        }
+        /**
+         * 你这个事件函数是一定有一个保留给event的参数的
+         * */
+        change(a1,a){
+            console.log(a1);
+            this.setState({
+                msg:a.target.value
+            });
+        }
+    }
+
+    ReactDOM.render(<Binding/>,app);
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>交互2</title>
+    <script type="text/javascript" src="../bower_components/react/react.js"></script><!--核心react-->
+    <script type="text/javascript" src="../bower_components/react/react-dom.js"></script><!--虚拟dom-->
+    <script type="text/javascript" src="../bower_components/babel/browser.js"></script><!--使用jsx-->
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script type="text/babel">
+    class Leo extends React.Component{
+        constructor() {
+            super();
+            this.state={
+                arr:[]
+            }
+        }
+
+        /**
+         * componentWillUpdate 它不会自己调用的 它只会在this.setState 之后自己调用
+         * */
+        componentWillUpdate(){
+            setTimeout(function(){
+                this.setState({
+                    arr:[Math.random()]
+                });
+            }.bind(this),1000);
+        }
+
+        componentWillMount(){
+            //console.log('开始获取数据')
+            setTimeout(function(){
+                this.setState({
+                    arr:['中国']
+                })
+            }.bind(this),1000)
+        }
+
+
+        render(){
+            let lis = [];
+            this.state.arr.forEach((val,index)=>{
+                lis.push(<li key={index}>{val}</li>);
+            });
+            return(<div>
+                <div style={{display:this.state.arr.length>0?'none':'block'}}>暂时没有数据...</div>
+                <ul>
+                    {lis}
+                </ul>
+            </div>)
+        }
+    }
+    ReactDOM.render(<Leo/>,app);
+</script>
+</html>
+
