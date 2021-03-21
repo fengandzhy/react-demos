@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="js/babel.min.js"></script>
+<script type="text/babel">
+    let users = [
+        {name:'张三'},
+        {name:'李四'},
+        {name:'王二'}
+    ];
+
+    /*@jsx createElement*/
+    let vDom = (<div> Hello World!
+        <ul>
+            {
+                users.map((val,index)=>{
+                    console.log(val.name);
+                    return(<li key={index}>{val.name}</li>);
+                })
+            }
+        </ul>
+    </div>);
+
+
+    function createElement(nodeName,attribute,...args){
+        let element = {nodeName:nodeName,attribute:attribute,children:[].concat(...args)};
+        return element;
+    }
+
+    function render(vNode){
+        if(vNode.split){
+            return document.createTextNode(vNode);
+        }
+
+        let node = document.createElement(vNode.nodeName);
+        let attr = node.attr || {};
+        Object.keys(attr).forEach((k)=>{
+            node.setAttribute(k,attr[k]);
+        });
+
+        let children = vNode.children || [];
+        children.forEach((n)=>{
+            node.appendChild(render(n));
+        });
+        return node;
+    }
+
+    let dom = render(vDom);
+    document.body.appendChild(dom);
+</script>
+</html>

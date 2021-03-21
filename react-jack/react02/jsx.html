@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsx实现虚拟dom</title>
+</head>
+<body>
+<script src="js/babel.min.js"></script>
+<script type="text/babel">
+
+    /*@jsx createElement*/ //@jsx是babel的子执行指令
+    let vDom = (<div id='app'>
+        Hello World!
+        <ul>
+            <li>张三</li>
+            <li>李四</li>
+        </ul>
+    </div>);
+
+
+    /**
+     *  这个方法的名字必须与上面 @jsx createElement 名字相同
+     */
+    function createElement(nodeName,attr,...args){
+        //console.log(nodeName,attr,args);
+        return {nodeName:nodeName,attr:attr,children:[].concat(...args)}
+    }
+
+    function render(vNode){
+
+        //如果是文本
+        if(vNode.split){
+            return document.createTextNode(vNode);
+        }
+        //如果不是文本
+        let node = document.createElement(vNode.nodeName);
+
+        let attr = vNode.attr || {};
+
+
+        /**
+         * attr本身并不是一个数组而是一个json对象
+         * Object.keys(attr) 就是把它的key值组成了一个数组
+         * Object.values(attr) 就是把它的values值组成了一个数组
+         * */
+        Object.keys(attr).forEach((k)=>{
+            node.setAttribute(k,attr[k]);
+        });
+
+
+        //添加子节点
+        (vNode.children || []).forEach((val)=>{
+            node.appendChild(render(val));
+        })
+        return node;
+    }
+
+    let dom = render(vDom);
+    document.body.appendChild(dom);
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+
+*{
+    margin:0;
+    padding:0;
+}
+
+body,
+button,
+input {
+    font:12px arial;
+}
+li{
+    list-style: none; /*去掉li小圆点*/
+}
+
+a{
+    color: #666;
+    text-decoration: none; /*超链接的下划线*/
+}
+
+
+button,
+input {
+    border:none;
+    outline: none; /*元素外围*/
+}
+
+body{
+    background-color: #f8fafc;
+}
+
+.w{
+    width:1190px;
+    margin: 0 auto;
+}
+
+/*这么写是为了兼容*/
+.clearfix{
+    *zoom:1;
+}
+
+/*清除浮动*/
+.clearfix::after{
+    content:"";
+    display:block;
+    height:0;
+    clear:both;
+}
+
+/*顶部栏*/
+.top-nav{
+    background-color:#f5f5f5;
+    padding:10px 0;
+    font-size:12px;
+}
+
+.top-nav .login{
+    float:left;
+}
+
+.top-nav .login .h{
+    color:#e63131;
+    margin-right:6px;
+}
+
+.top-nav .nav-list{
+    float:right;
+}
+
+.top-nav .nav-list li{
+    display: inline-block;
+    margin-left:10px;
+}
+
+/*搜索框*/
+.searchWrap .w{
+    position:relative;
+}
+
+.logo{
+    position:absolute;
+    top:33px;
+    left:15px;
+    width:150px;
+    height:56px;
+    line-height: 56px;
+    font-size:35px;
+    color:#e63131;
+    font-weight:bold;
+    text-align:center;
+}
+
+.search-box{
+    position:relative;
+    padding: 40px 0px 40px 300px;
+}
+
+/*以下的float:left是为了保证清除 input 与 button之间的间隔*/
+
+.search-box .searchInput{
+    float:left;
+    width:530px;
+    height:40px;
+    line-height: 40px;
+    border: 1px solid #ddd;
+    padding:0 10px;
+    font-size: 15px;
+}
+
+.search-box .search-btn{
+    float:left;
+    width:50px;
+    height:42px;
+    background-color:#e63131;
+    color:#fff;
+}
+
+.search-suggest{
+    display:none;
+    position:absolute;
+    top:82px;
+    background-color:#fff;
+    width:550px;
+    border:1px solid #ddd;
+}
+
+.search-suggest ul li{
+    height:30px;
+    line-height: 30px;
+    font-size:14px;
+    padding:0 10px;
+}
+
+/*商品分类*/
+.menu{
+    padding-bottom: 30px;
+}
+.aside-nav{
+    float:left;
+    width:200px;
+    height:500px;
+    box-shadow: 2px 6px 9px rgba(0,0,0,.2);
+}
+.list-item .item-href{
+    display:block;
+    height:50px;
+    line-height:50px;
+    color:#333;
+    border-bottom: 1px dotted #ddd;
+    box-sizing: border-box; /*修复最后一行超出的部分*/
+    margin: 0 20px;
+}
+
+
+
+
+
+
+
+
+
+
