@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>react事件</title>
+</head>
+
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/babel">
+
+    class MyComponent extends React.Component{
+        constructor() {
+            super();
+            this.peiqi = {isHot:true}; // 这里随便写一个变量是不行的
+            this.click = this.click.bind(this);
+        }
+        click() {
+            const isHot = this.peiqi.isHot;
+            this.peiqi = {isHot:!isHot}
+            console.log(this.peiqi);
+        }
+        render(){
+            const {isHot} = this.peiqi;
+            return <h1 onClick={this.click}>今天天气很{isHot ?'炎热':'凉爽'}</h1>
+        }
+    }
+    ReactDOM.render(<MyComponent/>, document.getElementById('app'));
+</script>
+</body>
+</html>
