@@ -15,6 +15,7 @@
     class MyComponent extends React.Component{
         state = {isHot:true};
         click = () => { // 箭头函数里的this就是它外层作用域的this
+            console.log(this);
             const isHot = this.state.isHot;
             this.setState({isHot: !isHot});
         }
