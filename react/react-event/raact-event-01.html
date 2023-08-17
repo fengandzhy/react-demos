@@ -18,6 +18,7 @@
             this.state = {isHot:true}; // 这里的state必须是一个object对象,
         }
         click() {
+            console.log(this);
             const isHot = this.state.isHot;
             this.setState({isHot: !isHot});
         }
