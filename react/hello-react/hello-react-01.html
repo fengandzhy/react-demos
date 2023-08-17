@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello React</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- 注意 以下不能写成 <script type="text/javascript" src="../react16/react.development.js"/>-->
+    <script type="text/javascript" src="../react16/react.development.js"></script>
+    <script type="text/javascript" src="../react16/react-dom.development.js"></script>
+    <script type="text/javascript" src="../react16/babel.min.js"></script>
+    <script type="text/babel">
+        const helloReact = 'Hello,React';
+        const vDom = <h1>{helloReact}</h1>; // 引入变量的方法
+        const app = document.getElementById('app');
+        ReactDOM.render(vDom,app)
+    </script>
+</body>
+
+</html>
