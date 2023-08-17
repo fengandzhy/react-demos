@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello React</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<!--纯粹的javascript 玩法-->
+<script type="text/javascript">
+    const helloReact = 'Hello,React';
+    const vDom = React.createElement('h1',{id:'title'},helloReact);
+    const app = document.getElementById('app');
+    ReactDOM.render(vDom,app)
+</script>
+</body>
+</html>
