@@ -13,7 +13,13 @@
     const helloReact = 'Hello,React';
     const vDom = React.createElement('h1',{id:'title'},helloReact);
     const app = document.getElementById('app');
-    ReactDOM.render(vDom,app)
+    ReactDOM.render(vDom,app);
+    /**
+     * 关于虚拟dom
+     * 1. 首先虚拟dom是一个object对象
+     * 2. 虚拟dom 比较轻，里面的属性少，真实dom比较重，里面的属性多. 虚拟dom只是在react里面用，不用那么多属性
+     *
+     * */
 </script>
 </body>
 </html>
