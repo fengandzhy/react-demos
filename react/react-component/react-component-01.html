@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数式组件</title>
+</head>
+
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/babel">
+
+    function MyComponent(){
+        console.log(this); // 这里的this 指向undefined
+        return <h1>你好，我是一个函数式组件.</h1>
+    }
+    ReactDOM.render(<MyComponent/>, document.getElementById('app'));
+
+    /**
+     * 1.函数式组件的函数首字母必须大写
+     * 2.调用的时候需要注意方式<MyComponent/>, 这个东西是组件标签.
+     * 3.因为上面的jsx要经过babel翻译成可以执行的js代码, 而在此过程中开启了严格模式,所以这里的this指向了undefined.
+     *
+     * 执行了ReactDOM.render(<MyComponent/>.......之后，发生了什么？
+     * 1.React解析组件标签，找到了MyComponent组件。
+     * 2.发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实DOM，随后呈现在页面中。
+     *
+     *
+     * */
+</script>
+</body>
+</html>
+
