@@ -23,6 +23,10 @@
             const {isHot} = this.state;
             return <h1 onClick={this.click}>今天天气很{isHot ?'炎热':'凉爽'}</h1>
         }
+        // evt = function() {
+        //     console.log(this);
+        //     this.setState({isHot: !isHot});
+        // }
     }
     ReactDOM.render(<MyComponent/>, document.getElementById('app'));
 </script>
