@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>类式组件</title>
+    <title>类式组件中的state</title>
 </head>
 
 <body>
@@ -13,23 +13,25 @@
 <script type="text/babel">
 
     class MyComponent extends React.Component{
+        constructor() {
+            super();
+            this.state = {isHot:true}; // 这里的state必须是一个object对象,
+        }
         render(){
-            //render是放在哪里的？—— MyComponent的原型对象上，供实例使用。
-            //render中的this是谁？—— MyComponent的实例对象 <=> MyComponent组件实例对象。
-            console.log('render中的this:',this);
-            return <h1>你好，我是一个类式组件.</h1>
+            const {isHot} = this.state;
+            return <h1>今天天气很{isHot ?'炎热':'凉爽'}</h1>
         }
     }
     ReactDOM.render(<MyComponent/>, document.getElementById('app'));
+
     /**
      *  执行了ReactDOM.render(<MyComponent/>.......之后，发生了什么？
      *  1.React解析组件标签，找到了MyComponent组件。
      *  2.发现组件是使用类定义的，随后new出来该类的实例，并通过该实例调用到原型上的render方法。
      *  3.将render返回的虚拟DOM转为真实DOM，随后呈现在页面中。
      *
-    */
+     */
 
 </script>
 </body>
 </html>
-
