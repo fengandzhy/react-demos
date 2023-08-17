@@ -13,18 +13,13 @@
 <script type="text/babel">
 
     class MyComponent extends React.Component{
-        constructor() {
-            super();
-            this.peiqi = {isHot:true}; // 这里随便写一个变量是不行的, 所有的东西都要放入state里面
-            this.click = this.click.bind(this);
-        }
-        click() {
-            const isHot = this.peiqi.isHot;
-            this.peiqi = {isHot:!isHot}
-            console.log(this.peiqi); // 这里虽然可以改变, 但是无法反应到页面中去
+        state = {isHot:true};
+        click = () => { // 箭头函数里的this就是它外层作用域的this
+            const isHot = this.state.isHot;
+            this.setState({isHot: !isHot});
         }
         render(){
-            const {isHot} = this.peiqi;
+            const {isHot} = this.state;
             return <h1 onClick={this.click}>今天天气很{isHot ?'炎热':'凉爽'}</h1>
         }
     }
