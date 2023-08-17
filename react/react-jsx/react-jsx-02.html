@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsx 语法</title>
+</head>
+
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/babel">
+    const frameworks = ['Angular','React','Vue'];
+    const aLi = [];
+    frameworks.forEach((val,index)=>{
+        aLi.push(<li key={index}>{val}</li>);
+    });
+    const vDom =(
+        <div>
+            <h1>前端框架集</h1>
+            <ul>
+                {aLi}
+            </ul>
+        </div>
+    );
+    ReactDOM.render(vDom,app);
+</script>
+</body>
+</html>
+
