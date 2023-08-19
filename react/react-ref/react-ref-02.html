@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ref 内联回调函数</title>
+    <title>ref 类绑定形式回调函数</title>
 </head>
 
 <body>
@@ -23,14 +23,19 @@
             const {input2} = this;
             alert(input2.value);
         }
+
         /**
-         * ref = {c => this.input2 = c} 这里用回调函数的形式把ref 绑定到了 input1之上
-         * 这里的箭头函数的形参c 就是这个组件本身 dom元素
+         * ref 类绑定形式回调函数 ref ={this.setInput}
          * */
+        setInput = (c)=>{
+            console.log(a);
+            this.input1 = c;
+        }
+
         render(){
             return (
                 <div>
-                    <input ref ={c => {this.input1 = c}} type="text" placeholder="点击按钮显示"/> &nbsp;
+                    <input ref ={this.setInput} type="text" placeholder="点击按钮显示"/> &nbsp;
                     <button onClick={this.click}>点击我</button> &nbsp;
                     <input onBlur={this.blur} ref = {c => this.input2 = c} type="text" placeholder="失去焦点显示"/>
                 </div>
