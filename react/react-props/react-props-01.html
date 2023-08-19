@@ -4,29 +4,24 @@
     <meta charset="UTF-8">
     <title>props 属性</title>
 </head>
-<style>
-    .title{
-        background-color: greenyellow;
-        width: 200px;
-    }
-</style>
+
 <body>
 <div id="app"></div>
 <script type="text/javascript" src="../react16/react.development.js"></script>
 <script type="text/javascript" src="../react16/react-dom.development.js"></script>
 <script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/javascript" src="../react16/prop-types.js"></script>
 <script type="text/babel">
     class MyComponent extends React.Component{
         constructor(props) {
             super(props);
-            this.state = {students:this.props.students};
+            this.state = {students:this.props.students}; // 这里一定要传入props, 否则无法读取这里的props
         }
         render(){
             const aLi = [];
             this.state.students.forEach((item,index) =>{
                 aLi.push(<li key={index}>姓名:{item.name}  年龄: {item.age}</li>);
-            })
-            console.log(students);
+            });
             return (
                 <ul>
                     {aLi}
