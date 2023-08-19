@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>表单登录非高阶函数玩法</title>
+    <title>表单登录bind的玩法</title>
 </head>
 <body>
 <div id="app"></div>
@@ -16,6 +16,9 @@
             password: ''
         }
 
+        /**
+         * 事件处理的event会自动加入的
+         * */
         saveFormData = (dataType, event) => {
             this.setState({[dataType] : event.target.value}); // 注意这里的写法[dataType] 保证的是拿到dataType里面的值
         }
@@ -26,6 +29,8 @@
          * onChange这里要求的是传一个函数过去给React调用, (event)=>this.saveFormData('username',event) 这本身就是一个函数，
          * this.saveFormData('username') 它虽然调用了一次函数，但是它也返回了一个函数
          *
+         * 再来看看这里，onChange={this.saveFormData.bind(this,'password')}
+         * 同理 this.saveFormData.bind(this,'password') 它也是一个函数bind函数第一个参数是this指向哪里的, 第二个以后才是传入参数
          *
          * */
         handleSubmit = (event) => {
@@ -38,10 +43,10 @@
             return (
                 <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
                     用户名：<label>
-                    <input type="text" name="username" onChange={(event)=>this.saveFormData('username',event)}/>
+                    <input type="text" name="username" onChange={this.saveFormData.bind(this,'username')}/>
                 </label>
                     密码：<label>
-                    <input type="password" name="password" onChange={(event)=>this.saveFormData('password',event)}/>
+                    <input type="password" name="password" onChange={this.saveFormData.bind(this,'password')}/>
                 </label>
                     <button>登录</button>
                 </form>
