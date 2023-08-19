@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单登录非高阶函数玩法</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/babel">
+    class Form extends React.Component {
+        state = {
+            username: '',
+            password: ''
+        }
+
+        saveFormData = (dataType, event) => {
+            this.setState({[dataType] : event.target.value}); // 注意这里的写法[dataType] 保证的是拿到dataType里面的值
+        }
+
+        /**
+         * 来看看这两种写法
+         * onChange={(event)=>this.saveFormData('username',event)}  onChange={this.saveFormData('username')}
+         * onChange这里要求的是传一个函数过去给React调用, (event)=>this.saveFormData('username',event) 这本身就是一个函数，
+         * this.saveFormData('username') 它虽然调用了一次函数，但是它也返回了一个函数
+         *
+         *
+         * */
+        handleSubmit = (event) => {
+            event.preventDefault(); // 阻止默认事件
+            const {username, password} = this.state;
+            alert(`用户名是: ${username}, 密码是：${password}.`);
+        }
+
+        render() {
+            return (
+                <form action="http://www.baidu.com" onSubmit={this.handleSubmit}>
+                    用户名：<label>
+                    <input type="text" name="username" onChange={(event)=>this.saveFormData('username',event)}/>
+                </label>
+                    密码：<label>
+                    <input type="password" name="password" onChange={(event)=>this.saveFormData('password',event)}/>
+                </label>
+                    <button>登录</button>
+                </form>
+            )
+        }
+    }
+
+    ReactDOM.render(<Form/>, app);
+</script>
+</body>
+</html>
