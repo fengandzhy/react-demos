@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单登录</title>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/babel">
+    class Form extends React.Component {
+        inputRef = React.createRef();
+        pwdRef = React.createRef();
+        /**
+         * form里面如果有写 onSubmit, 并且里面还有button那么点击button就会触发submit事件
+         * */
+        handleSubmit = (event) => {
+            event.preventDefault(); // 阻止默认事件
+            alert(`用户名是: ${this.inputRef.current.value}, 密码是：${this.pwdRef.current.value}.`);
+        }
+        render(){
+            return (
+                <form action="www.baidu.com" onSubmit={this.handleSubmit}>
+                   用户名：<input type="text" name="username" ref={this.inputRef}/>
+                   密码：<input type="password" name="password" ref={this.pwdRef}/>
+                   <button>登录</button>
+                </form>
+            )
+        }
+    }
+    ReactDOM.render(<Form/>, app);
+</script>
+</body>
+</html>
