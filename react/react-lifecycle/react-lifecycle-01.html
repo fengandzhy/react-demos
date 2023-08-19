@@ -18,6 +18,9 @@
             ReactDOM.unmountComponentAtNode(app);
         }
 
+        /**
+         * 组件挂载完毕后调用
+         * */
         componentDidMount() {
             this.timer = setInterval(() => {
                 let {opacity} = this.state;
@@ -29,6 +32,9 @@
             }, 200);
         }
 
+        /**
+         * 组件即将卸载时调用
+         * */
         componentWillUnmount() {
             clearInterval(this.timer);
         }
