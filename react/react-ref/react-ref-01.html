@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ref 回调函数</title>
+</head>
+
+<body>
+<div id="app"></div>
+<script type="text/javascript" src="../react16/react.development.js"></script>
+<script type="text/javascript" src="../react16/react-dom.development.js"></script>
+<script type="text/javascript" src="../react16/babel.min.js"></script>
+<script type="text/javascript" src="../react16/prop-types.js"></script>
+<script type="text/babel">
+    class RefDemo extends React.Component{
+
+        click= ()=>{
+            console.log(this);
+            const {input1} = this;
+            alert(input1.value);
+        }
+        blur = ()=>{
+            const {input2} = this;
+            alert(input2.value);
+        }
+        /**
+         * ref = {c => this.input2 = c} 这里用回调函数的形式把ref 绑定到了 input1之上
+         * */
+        render(){
+            return (
+                <div>
+                    <input ref ={c => {this.input1 = c}} type="text" placeholder="点击按钮显示"/> &nbsp;
+                    <button onClick={this.click}>点击我</button> &nbsp;
+                    <input onBlur={this.blur} ref = {c => this.input2 = c} type="text" placeholder="失去焦点显示"/>
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(<RefDemo/>,app); // 这里自定义的组件第一个字母必须大写, 如果这里是小写那么它会去找html里的标签
+
+</script>
+</body>
+</html>
+
