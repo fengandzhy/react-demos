@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import './Hello.css';
+import hello from './Hello.module.css';
 export default class Hello extends Component{
+
     /**
-     * 这里的className 两个组件不能同名, 都叫title的话, 那样会似的样式混乱, Welcome.css 里的title 也会弄到 Hello组件上,
-     * 因为它们最后都在一个地方引入的
+     * 样式模块化, 样式文件名中间加入.module, 然后就可以用模块化引入了
      *
      * */
     render(){
         return(
-            <h2 className='hello_title'>Hello,React</h2>
+            <h2 className={hello.title}>Hello,React</h2>
         );
     }
 }
