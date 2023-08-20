@@ -6,12 +6,18 @@ import List from "./components/List/List";
 
 import './App.css';
 class App extends React.Component{
+    state={todos:[
+            {id:'001',name:'吃饭',status:false},
+            {id:'002',name:'睡觉',status:false},
+            {id:'003',name:'编码',status:false}
+        ]}
     render(){
+        const {todos} = this.state;
         return (
             <div className="todo-container">
                 <div className="todo-wrap">
                     <Header/>
-                    <List/>
+                    <List todos={todos}/>
                     <Footer/>
                 </div>
             </div>
