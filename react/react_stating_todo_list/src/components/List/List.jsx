@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import './List.css';
+import Item from "../Item/Item";
 export default class List extends Component{
     render(){
         return(
-            <div>
-
-            </div>
+            <ul className="todo-main">
+                <Item/>
+                <Item/>
+            </ul>
         );
     }
 }
