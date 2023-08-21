@@ -12,6 +12,7 @@ export default class Header extends Component{
         if(e.keyCode === 13){
             const todoObj = {id:nanoid(),name:e.target.value,done:false}
             this.props.getValue(todoObj);
+            e.target.value = '';
         }
     }
 

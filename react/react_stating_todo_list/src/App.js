@@ -28,12 +28,20 @@ class App extends React.Component {
         this.setState({todos: updatedTodos});
     }
 
-    delTodo = (id) =>{
+    delTodo = (id) => {
         const {todos} = this.state;
-        const updatedTodos = todos.filter((todo, index) =>{
+        const updatedTodos = todos.filter((todo, index) => {
             return todo.id !== id;
         });
         this.setState({todos: updatedTodos});
+    }
+
+    unCheckAll = (unCheckedTodos) => {
+        this.setState({todos: unCheckedTodos});
+    }
+
+    delFinished = (finishedTodos) => {
+        this.setState({todos: finishedTodos});
     }
 
     render() {
@@ -44,7 +52,7 @@ class App extends React.Component {
                 <div className="todo-wrap">
                     <Header getValue={this.getValue}/>
                     <List todos={todos} changeTodoStatus={this.changeTodoStatus} delTodo={this.delTodo}/>
-                    <Footer todos={todos} />
+                    <Footer todos={todos} unCheckAll={this.unCheckAll} delFinished={this.delFinished}/>
                 </div>
             </div>
         );

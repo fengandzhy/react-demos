@@ -24,7 +24,7 @@ export default class Item extends Component {
             <li style={{backgroundColor: mouse ? '#ddd' : '#FFF'}} onMouseLeave={this.mouseHandler.bind(this, false)}
                 onMouseEnter={this.mouseHandler.bind(this, true)}>
                 <label>
-                    <input type="checkbox" defaultChecked={todo.done} onChange={this.checkHandler.bind(this, todo.id)}/>
+                    <input type="checkbox" checked={todo.status} onChange={this.checkHandler.bind(this, todo.id)}/>
                     <span>{todo.name}</span>
                 </label>
                 <button className="btn btn-danger" style={{display: (mouse && todo.status) ? 'block' : 'none'}} onClick={()=>{this.props.delTodo(todo.id)}}>删除</button>
