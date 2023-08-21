@@ -11,12 +11,15 @@ class App extends React.Component{
             {id:'002',name:'睡觉',status:false},
             {id:'003',name:'编码',status:false}
         ]}
+    getValue=(val)=>{
+        this.setState({todos:[val,...this.state.todos]});
+    }
     render(){
         const {todos} = this.state;
         return (
             <div className="todo-container">
                 <div className="todo-wrap">
-                    <Header/>
+                    <Header getValue={this.getValue}/>
                     <List todos={todos}/>
                     <Footer/>
                 </div>
