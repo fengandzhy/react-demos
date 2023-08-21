@@ -11,19 +11,21 @@ export default class Footer extends Component {
         unCheckAll: PropTypes.func.isRequired
     }
 
-    unCheckAll = (todos) => {
+    unCheckAll = (todos,event) => {
         const unCheckTodo = todos.map((todo) => {
-            if (todo.status) {
-                return {...todo, status: false};
-            } else {
-                return todo;
+            if (!todo.status && event.target.checked) {
+                return {...todo, status: true};
             }
+            if (todo.status && !event.target.checked) {
+                return {...todo, status: false};
+            }
+            return todo;
         });
         this.props.unCheckAll(unCheckTodo);
     }
 
     delAllFinished = (todos) =>{
-        const allFinishedTodo = todos.map((todo) => {
+        const allFinishedTodo = todos.filter((todo) => {
             if (!todo.status) {
                 return todo;
             }
