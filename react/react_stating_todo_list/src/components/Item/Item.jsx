@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 export default class Item extends Component {
     state = {mouse: false}
     static propTypes = {
+        delTodo: PropTypes.func.isRequired,
         changeTodoStatus: PropTypes.func.isRequired
     }
 
@@ -26,7 +27,7 @@ export default class Item extends Component {
                     <input type="checkbox" defaultChecked={todo.done} onChange={this.checkHandler.bind(this, todo.id)}/>
                     <span>{todo.name}</span>
                 </label>
-                <button className="btn btn-danger" style={{display: mouse ? 'block' : 'none'}}>删除</button>
+                <button className="btn btn-danger" style={{display: (mouse && todo.status) ? 'block' : 'none'}} onClick={()=>{this.props.delTodo(todo.id)}}>删除</button>
             </li>
         );
     }

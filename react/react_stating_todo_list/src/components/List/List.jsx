@@ -6,12 +6,14 @@ import PropTypes from "prop-types";
 export default class List extends Component {
     static propTypes = {
         todos: PropTypes.array.isRequired,
+        delTodo: PropTypes.func.isRequired,
         changeTodoStatus: PropTypes.func.isRequired
     }
 
     render() {
         const todos = this.props.todos;
         const changeTodoStatus = this.props.changeTodoStatus;
+        const delTodo = this.props.delTodo;
         return (
             <ul className="todo-main">
                 {
@@ -19,7 +21,7 @@ export default class List extends Component {
                      * 因为forEach里面的函数并没有返回值,所以这里只能用map
                      * */
                     todos.map((todo) => {
-                        return <Item key={todo.id} todo={todo} changeTodoStatus={changeTodoStatus}/>
+                        return <Item key={todo.id} todo={todo} changeTodoStatus={changeTodoStatus} delTodo={delTodo}/>
                     })
                 }
             </ul>

@@ -28,6 +28,14 @@ class App extends React.Component {
         this.setState({todos: updatedTodos});
     }
 
+    delTodo = (id) =>{
+        const {todos} = this.state;
+        const updatedTodos = todos.filter((todo, index) =>{
+            return todo.id !== id;
+        });
+        this.setState({todos: updatedTodos});
+    }
+
     render() {
         const {todos} = this.state;
 
@@ -35,8 +43,8 @@ class App extends React.Component {
             <div className="todo-container">
                 <div className="todo-wrap">
                     <Header getValue={this.getValue}/>
-                    <List todos={todos} changeTodoStatus={this.changeTodoStatus}/>
-                    <Footer/>
+                    <List todos={todos} changeTodoStatus={this.changeTodoStatus} delTodo={this.delTodo}/>
+                    <Footer todos={todos} />
                 </div>
             </div>
         );
