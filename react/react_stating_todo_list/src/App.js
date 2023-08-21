@@ -20,7 +20,7 @@ class App extends React.Component {
         const {todos} = this.state;
         const updatedTodos = todos.map((todo) => {
             if (todo.id === id) {
-                return {...todo, done: status}
+                return {...todo, status} // 注意这里的写法
             } else {
                 return todo;
             }

@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 export default class List extends Component {
     static propTypes = {
+        todos: PropTypes.array.isRequired,
         changeTodoStatus: PropTypes.func.isRequired
     }
 
