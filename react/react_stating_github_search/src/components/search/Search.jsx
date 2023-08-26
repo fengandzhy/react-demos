@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import PropTypes from "prop-types";
 export default class Search extends Component {
     myRef1 = React.createRef();
+    static propTypes = {
+        getUsers: PropTypes.func.isRequired
+    }
     getResponse = ()=>{
         const {myRef1:{current:{value: keyWord}}} = this
         console.log(keyWord);
-        axios.get(`http://localhost:3000/api/search/users?q=${keyWord}`).then( // 注意这里的引号
-            response =>{console.log('success', response.data);},
+        axios.get(`/api/search/users?q=${keyWord}`).then( // 注意这里的引号
+            response =>{
+                this.props.getUsers(response.data.items);
+                },
             error =>{console.log('error', error);}
         );
     }
