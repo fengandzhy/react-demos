@@ -110,7 +110,9 @@
                     <ul>
                         {
                             this.state.persons.map((personObj,index)=>{
-                                return <li key={index}>{personObj.name}---{personObj.age}<input type="text"/></li>
+                                return <li key={index}>{personObj.name}---{personObj.age}<label>
+                                    <input type="text"/>
+                                </label></li>
                             })
                         }
                     </ul>
@@ -120,7 +122,9 @@
                     <ul>
                         {
                             this.state.persons.map((personObj)=>{
-                                return <li key={personObj.id}>{personObj.name}---{personObj.age}<input type="text"/></li>
+                                return <li key={personObj.id}>{personObj.name}---{personObj.age}<label>
+                                    <input type="text"/>
+                                </label></li>
                             })
                         }
                     </ul>
@@ -129,7 +133,7 @@
         }
     }
 
-    ReactDOM.render(<Person/>,app);
+    ReactDOM.render(<Person name={}/>,app);
 
 </script>
 </body>
