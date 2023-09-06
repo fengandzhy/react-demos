@@ -25,7 +25,9 @@ class App extends React.Component {
                     <div className="col-xs-6">
                         <div className="panel">
                             <div className="panel-body">
-                                <h3>我是Home的内容</h3>
+                                {/* 注册路由 */}
+                                <Route path="/about" component={About}/>
+                                <Route path="/home" component={Home}/>
                             </div>
                         </div>
                     </div>
