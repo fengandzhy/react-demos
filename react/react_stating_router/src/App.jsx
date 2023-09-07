@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import About from './components/about/About'
 import Home from './components/home/Home'
-import {Link,Route} from 'react-router-dom'
+import {Link, NavLink ,Route} from 'react-router-dom'
 class App extends React.Component {
 
     render() {
