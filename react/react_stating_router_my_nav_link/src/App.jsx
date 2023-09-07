@@ -2,7 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import About from './pages/about/About'
 import Home from './pages/home/Home'
-import {NavLink, Route} from 'react-router-dom'
+import MyNavLink from "./components/myNavLink/MyNavLink";
+import {Route,Switch} from 'react-router-dom'
 import './App.css';
 class App extends React.Component {
     render() {
@@ -16,19 +17,21 @@ class App extends React.Component {
                 <div className="row">
                     <div className="col-xs-2 col-xs-offset-2">
                         <div className="list-group">
-                            {/*NavLink 跟 Link 比, 它有一个自动地判断 是不是active 的样式. 默认情况下点击它, 它就会在className 里面追加 active
-                                但是我们这里采取的是用 activeClassName 来指定哪个才是active 的类
+                            {/*这样写 <MyNavLink to="/about">About</MyNavLink> 相当于 <MyNavLink to="/about" children="About"/>
+                            children是一个隐形属性
                             */}
-                            <NavLink activeClassName="frank" className="list-group-item" to="/about">About</NavLink>
-                            <NavLink activeClassName="frank" className="list-group-item" to="/home">Home</NavLink>
+                            <MyNavLink to="/about">About</MyNavLink>
+                            <MyNavLink to="/home">Home</MyNavLink>
                         </div>
                     </div>
                     <div className="col-xs-6">
                         <div className="panel">
                             <div className="panel-body">
-                                {/* 注册路由 */}
-                                <Route path="/about" component={About}/>
-                                <Route path="/home" component={Home}/>
+                                {/* switch 的作用就是当你匹配到一个路径时不再往下匹配了 */}
+                                <Switch>
+                                    <Route path="/about" component={About}/>
+                                    <Route path="/home" component={Home}/>
+                                </Switch>
                             </div>
                         </div>
                     </div>
