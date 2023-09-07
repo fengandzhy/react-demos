@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import About from './pages/about/About'
 import Home from './pages/home/Home'
 import MyNavLink from "./components/myNavLink/MyNavLink";
-import {Route} from 'react-router-dom'
+import {Route,Switch} from 'react-router-dom'
 import './App.css';
 class App extends React.Component {
     render() {
@@ -27,9 +27,11 @@ class App extends React.Component {
                     <div className="col-xs-6">
                         <div className="panel">
                             <div className="panel-body">
-                                {/* 注册路由 */}
-                                <Route path="/about" component={About}/>
-                                <Route path="/home" component={Home}/>
+                                {/* switch 的作用就是当你匹配到一个路径时不再往下匹配了 */}
+                                <Switch>
+                                    <Route path="/about" component={About}/>
+                                    <Route path="/home" component={Home}/>
+                                </Switch>
                             </div>
                         </div>
                     </div>
