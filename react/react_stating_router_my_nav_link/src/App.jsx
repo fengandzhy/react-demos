@@ -2,7 +2,8 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import About from './pages/about/About'
 import Home from './pages/home/Home'
-import {NavLink, Route} from 'react-router-dom'
+import MyNavLink from "./components/myNavLink/MyNavLink";
+import {Route} from 'react-router-dom'
 import './App.css';
 class App extends React.Component {
     render() {
@@ -16,11 +17,8 @@ class App extends React.Component {
                 <div className="row">
                     <div className="col-xs-2 col-xs-offset-2">
                         <div className="list-group">
-                            {/*NavLink 跟 Link 比, 它有一个自动地判断 是不是active 的样式. 默认情况下点击它, 它就会在className 里面追加 active
-                                但是我们这里采取的是用 activeClassName 来指定哪个才是active 的类
-                            */}
-                            <NavLink activeClassName="frank" className="list-group-item" to="/about">About</NavLink>
-                            <NavLink activeClassName="frank" className="list-group-item" to="/home">Home</NavLink>
+                            <MyNavLink to="/about">About</MyNavLink>
+                            <MyNavLink to="/home">Home</MyNavLink>
                         </div>
                     </div>
                     <div className="col-xs-6">
