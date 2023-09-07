@@ -17,6 +17,9 @@ class App extends React.Component {
                 <div className="row">
                     <div className="col-xs-2 col-xs-offset-2">
                         <div className="list-group">
+                            {/*这样写 <MyNavLink to="/about">About</MyNavLink> 相当于 <MyNavLink to="/about" children="About"/>
+                            children是一个隐形属性
+                            */}
                             <MyNavLink to="/about">About</MyNavLink>
                             <MyNavLink to="/home">Home</MyNavLink>
                         </div>
