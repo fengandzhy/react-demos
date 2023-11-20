@@ -20,8 +20,8 @@ class App extends React.Component {
                             {/*这样写 <MyNavLink to="/about">About</MyNavLink> 相当于 <MyNavLink to="/about" children="About"/>
                             children是一个隐形属性
                             */}
-                            <MyNavLink to="/about">About</MyNavLink>
-                            <MyNavLink to="/home">Home</MyNavLink>
+                            <MyNavLink to="/frank/about">About</MyNavLink>
+                            <MyNavLink to="/frank/home">Home</MyNavLink>
                         </div>
                     </div>
                     <div className="col-xs-6">
@@ -29,8 +29,8 @@ class App extends React.Component {
                             <div className="panel-body">
                                 {/* switch 的作用就是当你匹配到一个路径时不再往下匹配了 */}
                                 <Switch>
-                                    <Route path="/about" component={About}/>
-                                    <Route path="/home" component={Home}/>
+                                    <Route path="/frank/about" component={About}/>
+                                    <Route path="/frank/home" component={Home}/>
                                 </Switch>
                             </div>
                         </div>
