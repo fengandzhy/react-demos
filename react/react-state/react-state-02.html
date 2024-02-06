@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子组件改变父组件的state</title>
+</head>
+<body>
+    <div id="app"></div>
+    <!-- 注意 以下不能写成 <script type="text/javascript" src="../react16/react.development.js"/>-->
+    <script type="text/javascript" src="../react16/react.development.js"></script>
+    <script type="text/javascript" src="../react16/react-dom.development.js"></script>
+    <script type="text/javascript" src="../react16/babel.min.js"></script>
+    <script type="text/babel">
+        class ParentComponent extends React.Component {
+            state = { value: 'Hello' };
+
+            updateValue = newValue => {
+                this.setState({ value: newValue });
+            };
+
+            render() {
+                return <ChildComponent value={this.state.value} onUpdateValue={this.updateValue} />;
+            }
+        }
+
+        // function ChildComponent(props) {
+        //     return (
+        //         <div>
+        //             {props.value}
+        //             <button onClick={() => props.onUpdateValue('Updated value')}>Update</button>
+        //         </div>
+        //     );
+        // }
+        class ChildComponent extends React.Component {
+            render() {
+                return (
+                    <div>
+                        {this.props.value}
+                        <button onClick={() => this.props.onUpdateValue('Updated value')}>Update</button>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(<ParentComponent/>,document.getElementById('app'));
+    </script>
+</body>
+</html>
