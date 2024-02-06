@@ -27,7 +27,8 @@
             return(
                 <div>
                     {/* c 是本实例, this.input1 指的是Demo 组件里的 input1, 这个函数传进去的参数是它本身, 把它本身挂载到 this.input1 上
-                    当然，这里的this 箭头函数的this 指它外层的this 因此是render() 里面的this */}
+                    当然，这里的this 箭头函数的this 指它外层的this 因此是render() 里面的this
+                    这个函数由react来调用, 并且参数中传入的是当前的dom 对象*/}
                     <input ref={c => this.input1 = c } type="text" placeholder="点击按钮提示数据"/>&nbsp;
                     <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
                     <input onBlur={this.showData2} ref={c => this.input2 = c } type="text" placeholder="失去焦点提示数据"/>&nbsp;
