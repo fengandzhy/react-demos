@@ -15,7 +15,7 @@
     class MyComponent extends React.Component{
         constructor() {
             super();
-            this.peiqi = {isHot:true}; // 这里随便写一个变量是不行的, 所有的东西都要放入state里面
+            this.peiqi = {isHot:true}; // 这里随便写一个变量是不行的, 所有的东西都要放入state里面,因为只有放入state, 当state改变的时候才会重新渲染到页面中去
             this.click = this.click.bind(this);
         }
         click() {
