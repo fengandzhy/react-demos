@@ -37,17 +37,21 @@
             }, 1000);
         }
 
+        func2 = (currentNode) => {
+            this.input2 = currentNode;
+        }
+
         getSnapshotBeforeUpdate(){
-            return this.refs.list.scrollHeight;
+            return this.input2.scrollHeight;
         }
 
         componentDidUpdate(preProps,preState,height){
-            this.refs.list.scrollTop += this.refs.list.scrollHeight - height;
+            this.input2.scrollTop += this.input2.scrollHeight - height;
         }
 
         render(){
             return(
-                <div className="list" ref="list">
+                <div className="list" ref={this.func2}>
                     {
                         this.state.newsArr.map((n,index)=>{
                             return <div key={index} className="news">{n}</div>
